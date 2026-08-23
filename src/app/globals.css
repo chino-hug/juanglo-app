@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+:root {
+  --color-base: #f5f5f5;
+  --color-ink: #0d0d0d;
+  --color-steel: #bdbdbd;
+  --color-steel-light: #e2e2e2;
+  --color-concrete: #6b6b6b;
+  --color-safety: #ff5a00;
+  --color-safety-ink: #1a0800;
+  --color-progress: #2f7d4f;
+
+  /* order-status badge sentiment colors — the one deliberate spot in the
+     app that trades the monochrome+safety-orange palette for a soft,
+     at-a-glance status read, one hue per pipeline stage. */
+  --color-status-created: #e4eeff;
+  --color-status-created-ink: #2350c9;
+  --color-status-picking: #fbead8;
+  --color-status-picking-ink: #b15e24;
+  --color-status-packed: #f1fad2;
+  --color-status-packed-ink: #6c7a1a;
+  --color-status-out-for-delivery: #e6f775;
+  --color-status-out-for-delivery-ink: #43490a;
+  --color-status-delivered: #def7e6;
+  --color-status-delivered-ink: #1c7a44;
+  --color-status-cancelled: #fbe1e6;
+  --color-status-cancelled-ink: #c22740;
+}
+
+@theme inline {
+  --color-base: var(--color-base);
+  --color-ink: var(--color-ink);
+  --color-steel: var(--color-steel);
+  --color-steel-light: var(--color-steel-light);
+  --color-concrete: var(--color-concrete);
+  --color-safety: var(--color-safety);
+  --color-safety-ink: var(--color-safety-ink);
+  --color-progress: var(--color-progress);
+
+  --color-status-created: var(--color-status-created);
+  --color-status-created-ink: var(--color-status-created-ink);
+  --color-status-picking: var(--color-status-picking);
+  --color-status-picking-ink: var(--color-status-picking-ink);
+  --color-status-packed: var(--color-status-packed);
+  --color-status-packed-ink: var(--color-status-packed-ink);
+  --color-status-out-for-delivery: var(--color-status-out-for-delivery);
+  --color-status-out-for-delivery-ink: var(--color-status-out-for-delivery-ink);
+  --color-status-delivered: var(--color-status-delivered);
+  --color-status-delivered-ink: var(--color-status-delivered-ink);
+  --color-status-cancelled: var(--color-status-cancelled);
+  --color-status-cancelled-ink: var(--color-status-cancelled-ink);
+
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --font-sans: var(--font-sans);
+
+  --shadow-tag: 0 2px 0 0 var(--color-ink);
+  --shadow-card: 0 1px 2px 0 rgb(13 13 13 / 0.08), 0 1px 1px 0 rgb(13 13 13 / 0.04);
+}
+
+@layer base {
+  body {
+    background: var(--color-base);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3,
+  .display {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+    line-height: 0.95;
+  }
+
+  .tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* repeating 45deg hazard stripe — attention states only, never decoration */
+  .hazard-stripe {
+    background-image: repeating-linear-gradient(
+      45deg,
+      var(--color-ink) 0,
+      var(--color-ink) 6px,
+      var(--color-base) 6px,
+      var(--color-base) 12px
+    );
+  }
+
+  .hazard-stripe-safety {
+    background-image: repeating-linear-gradient(
+      45deg,
+      var(--color-safety) 0,
+      var(--color-safety) 6px,
+      var(--color-ink) 6px,
+      var(--color-ink) 12px
+    );
+  }
+
+  /* a printed utility label plate: "ZONA · A1" — used for zones, lot/order
+     codes, and any short system-generated identifier */
+  .label-plate {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-ink);
+    padding: 0.125rem 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+  }
+
+  /* bordered stat tile, like the LOT / ZONE / QTY utility boxes */
+  .utility-tile {
+    border: 1px solid var(--color-ink);
+    padding: 0.625rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .utility-tile-label {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-concrete);
+  }
+
+  .utility-tile-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .field-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-concrete);
+  }
+
+  .field-input {
+    width: 100%;
+    border: 1px solid var(--color-steel);
+    background: var(--color-steel-light);
+    padding: 0.625rem 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+  }
+
+  .field-input::placeholder {
+    color: var(--color-concrete);
+  }
+
+  .field-input:focus {
+    outline: none;
+    background: var(--color-base);
+    border-color: var(--color-safety);
+  }
+}

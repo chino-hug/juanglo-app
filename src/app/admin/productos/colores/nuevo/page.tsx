@@ -1,0 +1,22 @@
+import Link from "next/link";
+import { ColorForm } from "../color-form";
+import { IconChevronLeft } from "@/components/ui/icons";
+
+export default function NuevoColorPage() {
+  return (
+    <div className="flex flex-col gap-5">
+      <Link
+        href="/admin/productos/colores"
+        className="flex items-center gap-1 font-mono text-xs text-concrete"
+      >
+        <IconChevronLeft width={16} height={16} />
+        Colores
+      </Link>
+      <div>
+        <p className="label-plate">Nuevo</p>
+        <h1 className="display mt-2 text-3xl">Color del sistema</h1>
+      </div>
+      <ColorForm />
+    </div>
+  );
+}
