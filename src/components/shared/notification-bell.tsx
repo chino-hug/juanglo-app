@@ -11,7 +11,6 @@ import { markNotificationRead, markAllNotificationsRead } from "@/lib/actions/no
 import { formatOrderNumber } from "@/lib/order-status";
 import { NOTIFICATION_TYPE_LABEL } from "@/lib/notification-copy";
 import { cn } from "@/lib/cn";
-import { useRegisterDropdownOpen } from "@/lib/dropdown-overlay";
 import type { NotificationRow } from "@/lib/data/notifications";
 
 const DROPDOWN_LIMIT = 8;
@@ -34,8 +33,6 @@ export function NotificationBell({
   const panelRef = useRef<HTMLDivElement>(null);
 
   const unreadCount = items.filter((n) => !n.read).length;
-
-  useRegisterDropdownOpen(open);
 
   useEffect(() => {
     if (MOCK_MODE) return;

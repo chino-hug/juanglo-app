@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { IconChevronDown } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
-import { useRegisterDropdownOpen } from "@/lib/dropdown-overlay";
 
 export interface SelectOption {
   value: string;
@@ -41,25 +40,27 @@ export function Select({
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
-  const [openUpward, setOpenUpward] = useState(false);
+  const [panelMaxHeight, setPanelMaxHeight] = useState<number | undefined>(undefined);
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // The fixed tab bar slides fully off-screen while this is open (see
-  // dropdown-overlay.tsx), so it's no longer an obstacle to reserve space
-  // for. This flip is now just a plain viewport-edge check — for the rare
-  // case where the trigger itself sits close to the very bottom of the
-  // screen, the panel still opens upward so it stays fully visible.
-  const PANEL_MAX_HEIGHT = 256; // matches max-h-64
+  // Always opens downward — but the fixed tab bar (~56px) means the space
+  // below the trigger isn't necessarily all usable. Rather than flipping
+  // the panel upward (which just trades one overlap for a worse one, e.g.
+  // covering the field it belongs to) or hiding the tab bar, cap the
+  // panel's own height to whatever room genuinely exists above the tab
+  // bar and let its existing overflow-auto handle the rest by scrolling
+  // internally. The tab bar stays put and visible; the panel never reaches it.
+  const TAB_BAR_RESERVE = 64;
   const EDGE_MARGIN = 8;
-
-  useRegisterDropdownOpen(open);
+  const MIN_PANEL_HEIGHT = 96;
+  const DEFAULT_MAX_HEIGHT = 256; // matches max-h-64, used while nothing's measured yet
 
   function toggleOpen() {
     if (!open && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
-      const spaceBelow = window.innerHeight - rect.bottom - EDGE_MARGIN;
-      setOpenUpward(spaceBelow < PANEL_MAX_HEIGHT);
+      const spaceBelow = window.innerHeight - rect.bottom - TAB_BAR_RESERVE - EDGE_MARGIN;
+      setPanelMaxHeight(Math.max(MIN_PANEL_HEIGHT, Math.min(spaceBelow, DEFAULT_MAX_HEIGHT)));
     }
     setOpen((v) => !v);
   }
@@ -111,10 +112,8 @@ export function Select({
       {open && (
         <ul
           role="listbox"
-          className={cn(
-            "absolute z-50 max-h-64 w-full overflow-auto border border-ink bg-base shadow-tag",
-            openUpward ? "bottom-full mb-1" : "top-full mt-1",
-          )}
+          style={{ maxHeight: panelMaxHeight ?? DEFAULT_MAX_HEIGHT }}
+          className="absolute top-full z-50 mt-1 w-full overflow-auto border border-ink bg-base shadow-tag"
         >
           {options.length === 0 && (
             <li className="px-3 py-2 text-sm text-concrete">Sin opciones</li>

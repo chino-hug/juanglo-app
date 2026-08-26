@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
-import { useAnyDropdownOpen } from "@/lib/dropdown-overlay";
 import { IconPackage, IconList } from "@/components/ui/icons";
 
 const TABS = [
@@ -13,15 +12,9 @@ const TABS = [
 
 export function TabBar() {
   const pathname = usePathname();
-  const hidden = useAnyDropdownOpen();
 
   return (
-    <nav
-      className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-ink bg-base transition-transform duration-150",
-        hidden && "translate-y-full",
-      )}
-    >
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-ink bg-base">
       <ul className="mx-auto flex max-w-lg">
         {TABS.map(({ href, label, Icon, exact }) => {
           const active = exact ? pathname === href : pathname.startsWith(href);
