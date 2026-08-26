@@ -112,7 +112,7 @@ export function NotificationBell({
       </button>
 
       {open && (
-        <div className="absolute right-0 top-12 z-50 flex max-h-[70vh] w-80 max-w-[calc(100vw-2rem)] flex-col border border-ink bg-base shadow-card">
+        <div className="absolute right-0 top-12 z-50 flex max-h-[min(70vh,calc(100vh-11rem))] w-80 max-w-[calc(100vw-2rem)] flex-col border border-ink bg-base shadow-card">
           <div className="flex items-center justify-between gap-2 border-b border-ink px-3.5 py-2.5">
             <span className="field-label">Notificaciones</span>
             {unreadCount > 0 && (

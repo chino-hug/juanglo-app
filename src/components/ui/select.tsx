@@ -40,7 +40,27 @@ export function Select({
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [openUpward, setOpenUpward] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // The bottom tab bar is a fixed overlay (~56px), not part of document
+  // flow, so it never "pushes" — nothing below the fold makes room for it
+  // automatically. Instead: measure space below the trigger before
+  // opening, and flip the panel above the trigger when there isn't enough
+  // room, so it always lands fully inside the scrollable content and never
+  // has to render under (or fight z-index with) the tab bar.
+  const TAB_BAR_RESERVE = 72;
+  const PANEL_MAX_HEIGHT = 256; // matches max-h-64
+
+  function toggleOpen() {
+    if (!open && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom - TAB_BAR_RESERVE;
+      setOpenUpward(spaceBelow < PANEL_MAX_HEIGHT);
+    }
+    setOpen((v) => !v);
+  }
 
   useEffect(() => {
     if (!open) return;
@@ -66,10 +86,11 @@ export function Select({
     <div ref={rootRef} className={cn("relative", className)}>
       <input type="hidden" name={name} value={value} required={required} />
       <button
+        ref={buttonRef}
         id={id}
         type="button"
         disabled={disabled}
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggleOpen}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={ariaLabel}
@@ -88,7 +109,10 @@ export function Select({
       {open && (
         <ul
           role="listbox"
-          className="absolute z-50 mt-1 max-h-64 w-full overflow-auto border border-ink bg-base shadow-tag"
+          className={cn(
+            "absolute z-50 max-h-64 w-full overflow-auto border border-ink bg-base shadow-tag",
+            openUpward ? "bottom-full mb-1" : "top-full mt-1",
+          )}
         >
           {options.length === 0 && (
             <li className="px-3 py-2 text-sm text-concrete">Sin opciones</li>
