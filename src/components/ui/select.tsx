@@ -88,7 +88,7 @@ export function Select({
       {open && (
         <ul
           role="listbox"
-          className="absolute z-30 mt-1 max-h-64 w-full overflow-auto border border-ink bg-base shadow-tag"
+          className="absolute z-50 mt-1 max-h-64 w-full overflow-auto border border-ink bg-base shadow-tag"
         >
           {options.length === 0 && (
             <li className="px-3 py-2 text-sm text-concrete">Sin opciones</li>
