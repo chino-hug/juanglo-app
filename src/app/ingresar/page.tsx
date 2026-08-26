@@ -13,7 +13,7 @@ export default function IngresarPage() {
             width={1400}
             height={509}
             priority
-            className="mx-auto mb-4 h-10 w-auto"
+            className="mx-auto mb-4 h-[60px] w-auto"
           />
           <p className="label-plate mx-auto mb-4 w-fit">Sistema ISG-01</p>
           <h1 className="display text-4xl">
