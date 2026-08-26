@@ -35,9 +35,9 @@ export function TopBar({
         )}
       >
         <div>
-          <p className="label-plate flex w-fit items-center gap-1.5">
-            <Image src="/logo-mark.png" alt="" width={10} height={16} className="h-3.5 w-auto" aria-hidden />
-            Juanglo
+          <p className="flex w-fit items-center gap-1.5">
+            <Image src="/logo-mark.png" alt="" width={13} height={21} className="h-[18px] w-auto" aria-hidden />
+            <span className="font-mono text-[11px] font-medium uppercase tracking-wide">Juanglo</span>
           </p>
           <form action={signOut}>
             <button
