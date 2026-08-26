@@ -18,7 +18,7 @@ export function FabLink({
   icon: React.ReactNode;
 }) {
   return (
-    <Link href={href} aria-label={label} className="mt-2 flex justify-end">
+    <Link href={href} aria-label={label} className="mt-2 flex justify-end md:justify-start">
       <Button variant="primary" className="!px-4 shadow-tag">
         {icon}
         {label}
