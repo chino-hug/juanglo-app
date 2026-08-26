@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireSeller } from "@/lib/auth";
 import { listOrders } from "@/lib/data/orders";
 import { Card } from "@/components/ui/card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { FabLink } from "@/components/ui/fab-link";
 import { OrderStatusTag } from "@/components/ui/order-status-tag";
 import { IconPlus } from "@/components/ui/icons";
@@ -56,7 +57,7 @@ export default async function PedidosPage({
         </div>
       )}
 
-      <ul className="flex flex-col gap-2.5">
+      <CardGrid>
         {orders.map((order) => (
           <li key={order.id}>
             <Link href={`/vendedor/pedidos/${order.id}`}>
@@ -76,7 +77,7 @@ export default async function PedidosPage({
             </Link>
           </li>
         ))}
-      </ul>
+      </CardGrid>
 
       <FabLink
         href="/vendedor/pedidos/nuevo"

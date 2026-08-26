@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireSeller } from "@/lib/auth";
 import { listClients, listZones } from "@/lib/data/clients";
 import { Card } from "@/components/ui/card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { LabelPlate } from "@/components/ui/label-plate";
 import { FabLink } from "@/components/ui/fab-link";
 import { ClientStatusTag } from "@/components/seller/client-status-tag";
@@ -69,7 +70,7 @@ export default async function ClientesPage({
         </div>
       )}
 
-      <ul className="flex flex-col gap-2.5">
+      <CardGrid>
         {clients.map((client) => (
           <li key={client.id}>
             <Link href={`/vendedor/clientes/${client.id}`}>
@@ -97,7 +98,7 @@ export default async function ClientesPage({
             </Link>
           </li>
         ))}
-      </ul>
+      </CardGrid>
 
       <FabLink
         href="/vendedor/clientes/nuevo"

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireSeller } from "@/lib/auth";
 import { listAppointmentsForMonth, listMonthsWithAppointments } from "@/lib/data/appointments";
 import { StopCard } from "@/components/seller/stop-card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { AddStopButton } from "@/components/seller/add-stop-button";
 import { IconChevronLeft } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
@@ -120,7 +121,7 @@ export default async function AgendaPage({
               })}
             </h2>
 
-            <ul className="flex flex-col gap-2.5">
+            <CardGrid>
               {appts.map((appt) =>
                 appt.client ? (
                   <li key={appt.id}>
@@ -138,7 +139,7 @@ export default async function AgendaPage({
                   </li>
                 ) : null,
               )}
-            </ul>
+            </CardGrid>
           </section>
         );
       })}

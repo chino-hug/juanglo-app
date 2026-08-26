@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { listQueueOrders, QUEUE_STATUSES } from "@/lib/data/picking";
 import { Card } from "@/components/ui/card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { LabelPlate } from "@/components/ui/label-plate";
 import { OrderStatusTag } from "@/components/ui/order-status-tag";
 import { StatusDropdown } from "@/components/shared/status-dropdown";
@@ -42,7 +43,7 @@ export default async function PreparacionPage() {
                 </span>
               </div>
 
-              <ul className="flex flex-col gap-2.5">
+              <CardGrid>
                 {section.orders.map((order) => (
                   <li key={order.id}>
                     <Card className="flex flex-col gap-3 p-3.5">
@@ -72,7 +73,7 @@ export default async function PreparacionPage() {
                     </Card>
                   </li>
                 ))}
-              </ul>
+              </CardGrid>
             </section>
           ),
       )}

@@ -3,6 +3,7 @@ import { requireSeller } from "@/lib/auth";
 import { getTodayStops, getSellerDashboardStats } from "@/lib/data/seller";
 import { UtilityTile } from "@/components/ui/utility-tile";
 import { StopCard } from "@/components/seller/stop-card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { AddStopButton } from "@/components/seller/add-stop-button";
 import { FabLink } from "@/components/ui/fab-link";
 import { IconPlus } from "@/components/ui/icons";
@@ -64,7 +65,7 @@ export default async function HoyPage() {
           </div>
         )}
 
-        <ul className="flex flex-col gap-2.5">
+        <CardGrid>
           {rows.map((stop) =>
             stop.client ? (
               <li key={stop.id}>
@@ -82,7 +83,7 @@ export default async function HoyPage() {
               </li>
             ) : null,
           )}
-        </ul>
+        </CardGrid>
 
         <AddStopButton />
       </section>

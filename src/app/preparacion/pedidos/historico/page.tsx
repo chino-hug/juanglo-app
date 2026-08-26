@@ -8,6 +8,7 @@ import {
 import { listAllClients, getClientOrders } from "@/lib/data/clients";
 import { OrderViewTabs } from "@/components/shared/order-view-tabs";
 import { OrderSummaryCard } from "@/components/shared/order-summary-card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { ClientFilterSelect } from "@/components/shared/client-filter-select";
 import { UtilityTile } from "@/components/ui/utility-tile";
 import { cn } from "@/lib/cn";
@@ -151,7 +152,7 @@ export default async function HistoricoDePedidosPage({
         </div>
       )}
 
-      <ul className="flex flex-col gap-2">
+      <CardGrid>
         {orders.map((order) => (
           <li key={order.id}>
             <OrderSummaryCard
@@ -167,7 +168,7 @@ export default async function HistoricoDePedidosPage({
             />
           </li>
         ))}
-      </ul>
+      </CardGrid>
     </div>
   );
 }

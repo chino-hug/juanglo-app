@@ -3,6 +3,7 @@ import { listAllClients, getClientOrders } from "@/lib/data/clients";
 import { OrderViewTabs } from "@/components/shared/order-view-tabs";
 import { PackingProgressBar } from "@/components/shared/packing-progress-bar";
 import { OrderSummaryCard } from "@/components/shared/order-summary-card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { ClientFilterSelect } from "@/components/shared/client-filter-select";
 import { UtilityTile } from "@/components/ui/utility-tile";
 import { FilterDisclosure } from "@/components/ui/filter-disclosure";
@@ -132,7 +133,7 @@ export default async function TodosLosPedidosPage({
         </div>
       )}
 
-      <ul className="flex flex-col gap-2.5">
+      <CardGrid>
         {filteredOrders.map((order) => (
           <li key={order.id}>
             <OrderSummaryCard
@@ -147,7 +148,7 @@ export default async function TodosLosPedidosPage({
             />
           </li>
         ))}
-      </ul>
+      </CardGrid>
     </div>
   );
 }

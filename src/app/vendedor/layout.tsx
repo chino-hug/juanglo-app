@@ -14,8 +14,11 @@ export default async function VendedorLayout({ children }: { children: React.Rea
         userId={profile.id}
         notifications={notifications}
         adminReturnHref={profile.role === "admin" ? "/admin" : undefined}
+        wide
       />
-      <main className="mx-auto w-full max-w-lg flex-1 px-4 pb-24 pt-4">{children}</main>
+      <main className="mx-auto w-full max-w-lg flex-1 px-4 pb-24 pt-4 md:max-w-3xl lg:max-w-6xl">
+        {children}
+      </main>
       <TabBar />
     </div>
   );
