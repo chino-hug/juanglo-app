@@ -40,7 +40,7 @@ export function TopBar({
             alt="Juanglo"
             width={1400}
             height={509}
-            className="h-[60px] w-auto"
+            className="h-[40px] w-auto"
           />
           <form action={signOut}>
             <button
