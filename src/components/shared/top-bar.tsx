@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { signOut } from "@/app/ingresar/actions";
 import { NotificationBell } from "./notification-bell";
+import { cn } from "@/lib/cn";
 import type { NotificationRow } from "@/lib/data/notifications";
 
 export function TopBar({
@@ -10,6 +11,7 @@ export function TopBar({
   notificationsHref = "/vendedor/notificaciones",
   notificationsOrderHrefPrefix = "/vendedor/pedidos",
   adminReturnHref,
+  wide = false,
 }: {
   personName: string;
   userId: string;
@@ -19,10 +21,18 @@ export function TopBar({
   // Set only when an admin is browsing the seller/picking flows — without
   // it they'd land in that role's own nav and have no way back to /admin.
   adminReturnHref?: string;
+  // Matches the main content area's breakpoint widening (admin only —
+  // seller/picking stay mobile-width by design, see PRODUCT.md).
+  wide?: boolean;
 }) {
   return (
     <header className="sticky top-0 z-40 border-b border-ink bg-base">
-      <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-3">
+      <div
+        className={cn(
+          "mx-auto flex max-w-lg items-center justify-between px-4 py-3",
+          wide && "md:max-w-3xl lg:max-w-6xl",
+        )}
+      >
         <div>
           <p className="label-plate">Velas</p>
           <form action={signOut}>
