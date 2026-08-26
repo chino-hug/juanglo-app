@@ -10,7 +10,12 @@ export function Card({
   attention?: boolean;
 }) {
   return (
-    <div className={cn("relative border border-ink bg-base", className)}>
+    <div
+      className={cn(
+        "relative border border-ink bg-base transition-shadow duration-150 hover:shadow-card",
+        className,
+      )}
+    >
       {attention && (
         <span
           className="hazard-stripe absolute right-0 top-0 h-6 w-6"

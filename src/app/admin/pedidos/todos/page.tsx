@@ -3,6 +3,7 @@ import { listOrdersForAdmin, listOrdersPackedToday } from "@/lib/data/orders";
 import { getPackingProgress } from "@/lib/data/picking";
 import { listAllClients, getClientOrders } from "@/lib/data/clients";
 import { OrderSummaryCard } from "@/components/shared/order-summary-card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { PackingProgressBar } from "@/components/shared/packing-progress-bar";
 import { ClientFilterSelect } from "@/components/shared/client-filter-select";
 import { UtilityTile } from "@/components/ui/utility-tile";
@@ -212,7 +213,7 @@ export default async function AdminPedidosTodosPage({
         </div>
       )}
 
-      <ul className="flex flex-col gap-2.5">
+      <CardGrid>
         {filteredOrders.map((order) => (
           <li key={order.id}>
             <OrderSummaryCard
@@ -227,7 +228,7 @@ export default async function AdminPedidosTodosPage({
             />
           </li>
         ))}
-      </ul>
+      </CardGrid>
     </div>
   );
 }

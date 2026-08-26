@@ -2,6 +2,7 @@ import Link from "next/link";
 import { listProducts } from "@/lib/data/orders";
 import { listCategories } from "@/lib/data/categories";
 import { Card } from "@/components/ui/card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { FabLink } from "@/components/ui/fab-link";
 import { IconPlus, IconChevronLeft } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
@@ -56,7 +57,7 @@ export default async function TodosLosProductosPage({
         ))}
       </div>
 
-      <ul className="flex flex-col gap-2.5">
+      <CardGrid>
         {products.map((product) => {
           const lowStock = product.quantity_on_hand <= product.low_stock_threshold;
           return (
@@ -99,7 +100,7 @@ export default async function TodosLosProductosPage({
             </li>
           );
         })}
-      </ul>
+      </CardGrid>
 
       <FabLink
         href="/admin/productos/nuevo"

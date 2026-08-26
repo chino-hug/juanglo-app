@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { listUsers } from "@/lib/data/users";
 import { Card } from "@/components/ui/card";
+import { CardGrid } from "@/components/ui/card-grid";
 import { Avatar } from "@/components/ui/avatar";
 import { FabLink } from "@/components/ui/fab-link";
 import { IconPlus } from "@/components/ui/icons";
@@ -48,7 +49,7 @@ export default async function UsuariosPage({
         ))}
       </div>
 
-      <ul className="flex flex-col gap-2.5">
+      <CardGrid>
         {users.map((user) => (
           <li key={user.id}>
             <Link href={`/admin/usuarios/${user.id}`}>
@@ -69,7 +70,7 @@ export default async function UsuariosPage({
             </Link>
           </li>
         ))}
-      </ul>
+      </CardGrid>
 
       <FabLink
         href="/admin/usuarios/nuevo"
