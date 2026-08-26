@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IconChevronDown } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
+import { useRegisterDropdownOpen } from "@/lib/dropdown-overlay";
 
 export interface SelectOption {
   value: string;
@@ -44,19 +45,20 @@ export function Select({
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // The bottom tab bar is a fixed overlay (~56px), not part of document
-  // flow, so it never "pushes" — nothing below the fold makes room for it
-  // automatically. Instead: measure space below the trigger before
-  // opening, and flip the panel above the trigger when there isn't enough
-  // room, so it always lands fully inside the scrollable content and never
-  // has to render under (or fight z-index with) the tab bar.
-  const TAB_BAR_RESERVE = 72;
+  // The fixed tab bar slides fully off-screen while this is open (see
+  // dropdown-overlay.tsx), so it's no longer an obstacle to reserve space
+  // for. This flip is now just a plain viewport-edge check — for the rare
+  // case where the trigger itself sits close to the very bottom of the
+  // screen, the panel still opens upward so it stays fully visible.
   const PANEL_MAX_HEIGHT = 256; // matches max-h-64
+  const EDGE_MARGIN = 8;
+
+  useRegisterDropdownOpen(open);
 
   function toggleOpen() {
     if (!open && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
-      const spaceBelow = window.innerHeight - rect.bottom - TAB_BAR_RESERVE;
+      const spaceBelow = window.innerHeight - rect.bottom - EDGE_MARGIN;
       setOpenUpward(spaceBelow < PANEL_MAX_HEIGHT);
     }
     setOpen((v) => !v);
