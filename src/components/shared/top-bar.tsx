@@ -35,10 +35,13 @@ export function TopBar({
         )}
       >
         <div>
-          <p className="flex w-fit items-center gap-1.5">
-            <Image src="/logo-mark.png" alt="" width={37} height={60} className="h-[60px] w-auto" aria-hidden />
-            <span className="font-mono text-[11px] font-medium uppercase tracking-wide">Juanglo</span>
-          </p>
+          <Image
+            src="/logo-wordmark.png"
+            alt="Juanglo"
+            width={1400}
+            height={509}
+            className="h-[60px] w-auto"
+          />
           <form action={signOut}>
             <button
               type="submit"
