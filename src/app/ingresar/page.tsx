@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MOCK_MODE } from "@/lib/mock/config";
 import { LoginForm } from "./login-form";
 
@@ -6,7 +7,15 @@ export default function IngresarPage() {
     <main className="flex min-h-full flex-1 items-center justify-center px-6 py-12">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
-          <p className="label-plate mx-auto mb-4 w-fit">Velas · Sistema ISG-01</p>
+          <Image
+            src="/logo-wordmark.png"
+            alt="Juanglo"
+            width={1400}
+            height={509}
+            priority
+            className="mx-auto mb-4 h-10 w-auto"
+          />
+          <p className="label-plate mx-auto mb-4 w-fit">Sistema ISG-01</p>
           <h1 className="display text-4xl">
             Iniciá
             <br />

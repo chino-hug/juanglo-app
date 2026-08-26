@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { signOut } from "@/app/ingresar/actions";
 import { NotificationBell } from "./notification-bell";
 import { cn } from "@/lib/cn";
@@ -34,7 +35,10 @@ export function TopBar({
         )}
       >
         <div>
-          <p className="label-plate">Velas</p>
+          <p className="label-plate flex w-fit items-center gap-1.5">
+            <Image src="/logo-mark.png" alt="" width={10} height={16} className="h-3.5 w-auto" aria-hidden />
+            Juanglo
+          </p>
           <form action={signOut}>
             <button
               type="submit"
